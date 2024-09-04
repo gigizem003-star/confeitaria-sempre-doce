@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contato</title>
+     <style>
+        /* Estilos Básicos e Responsividade */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: #FFA07A; /* Laranja suave */
+        }
+
+        nav {
+            flex: 1;
+            text-align: right;
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .menu li {
+            margin-left: 20px;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .menu li a:hover {
+            color: #FFA07A;
+        }
+
+        .menu li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #FFA07A;
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s;
+        }
+
+        .menu li a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(120deg, #87CEEB, #FF69B4); /* Azul para Rosa */
+            color: white;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .hero h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .hero button {
+            padding: 10px 20px;
+            background-color: #FFA07A;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            border-radius: 5px;
+        }
+
+        .hero button:hover {
+            background-color: #FF69B4;
+            transform: scale(1.05);
+        }
+
+        .featured, .story, .contact {
+            padding: 50px 20px;
+            text-align: center;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .featured h3, .story h3, .contact h3 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #FF69B4; /* Rosa */
+        }
+
+        .story p {
+            font-size: 18px;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            line-height: 1.8;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: #fff;
+            border: 2px solid #FFA07A;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            margin: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .card h4 {
+            color: #FF69B4; /* Rosa */
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .card button {
+            padding: 10px 15px;
+            background-color: #FFA07A;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .card button:hover {
+            background-color: #FF69B4;
+            transform: scale(1.05);
+        }
+
+        .cart {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            max-width: 250px;
+        }
+
+        .cart h4 {
+            margin-bottom: 10px;
+        }
+
+        .cart ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .cart ul li {
+            margin-bottom: 5px;
+        }
+
+        .cart ul li span {
+            font-weight: bold;
+        }
+
+        .cart button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #FFA07A;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 5px;
+        }
+
+        .cart button:hover {
+            background-color: #FF69B4;
+        }
+
+        .contact p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 30px auto;
+        }
+
+        .contact-info div {
+            margin: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .contact-info a {
+            color: #FF69B4;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: #FFA07A;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                flex-direction: column;
+                display: none;
+                background-color: #333;
+                width: 100%;
+                text-align: center;
+            }
+
+            .menu-active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero h2 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+ <section class="contact" id="contato">
+            <h3>Entre em Contato</h3>
+            <p>Tem alguma dúvida ou quer fazer um pedido especial? Entre em contato conosco!</p>
+            <div class="contact-info">
+                <div>
+                    <h4>Telefone</h4>
+                    <p>(19) 98449-2224</p>
+                </div>
+                <div>
+                    <h4>Email</h4>
+                    <p><a href="mailto:contato@sempredoce.com">contato@sempredoce.com</a></p>
+                </div>
+                <div>
+                    <h4>Endereço</h4>
+                    <p>Rua Ipiranga, 123 - Cidade Piracicaba, SP</p>
+                </div>
+            </div>
+        </section>
+</body>
+</html>

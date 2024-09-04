@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sempre Doce</title>
+    <style>
+        /* Estilos Básicos e Responsividade */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: #FFA07A; /* Laranja suave */
+        }
+
+        nav {
+            flex: 1;
+            text-align: right;
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .menu li {
+            margin-left: 20px;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .menu li a:hover {
+            color: #FFA07A;
+        }
+
+        .menu li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #FFA07A;
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s;
+        }
+
+        .menu li a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(120deg, #87CEEB, #FF69B4); /* Azul para Rosa */
+            color: white;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .hero h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .hero button {
+            padding: 10px 20px;
+            background-color: #FFA07A;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            border-radius: 5px;
+        }
+
+        .hero button:hover {
+            background-color: #FF69B4;
+            transform: scale(1.05);
+        }
+
+        .featured, .story, .contact {
+            padding: 50px 20px;
+            text-align: center;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .featured h3, .story h3, .contact h3 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #FF69B4; /* Rosa */
+        }
+
+        .story p {
+            font-size: 18px;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            line-height: 1.8;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: #fff;
+            border: 2px solid #FFA07A;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            margin: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .card h4 {
+            color: #FF69B4; /* Rosa */
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .card button {
+            padding: 10px 15px;
+            background-color: #FFA07A;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .card button:hover {
+            background-color: #FF69B4;
+            transform: scale(1.05);
+        }
+
+        .cart {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            max-width: 250px;
+        }
+
+        .cart h4 {
+            margin-bottom: 10px;
+        }
+
+        .cart ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .cart ul li {
+            margin-bottom: 5px;
+        }
+
+        .cart ul li span {
+            font-weight: bold;
+        }
+
+        .cart button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #FFA07A;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 5px;
+        }
+
+        .cart button:hover {
+            background-color: #FF69B4;
+        }
+
+        .contact p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 30px auto;
+        }
+
+        .contact-info div {
+            margin: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .contact-info a {
+            color: #FF69B4;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: #FFA07A;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                flex-direction: column;
+                display: none;
+                background-color: #333;
+                width: 100%;
+                text-align: center;
+            }
+
+            .menu-active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero h2 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Sempre Doce</h1>
+        </div>
+        <nav>
+            <ul class="menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#cardapio">Cardápio</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <span class="menu-toggle">&#9776;</span>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Seção Hero -->
+        <section class="hero" id="home">
+            <h2>Bem-vindo à Sempre Doce</h2>
+            <p>Onde o doce é sempre uma experiência única.</p>
+            <button>Conheça nosso cardápio</button>
+        </section>
+
+        <!-- Seção de História -->
+        <section class="story" id="sobre">
+            <h3>Nossa História</h3>
+            <p>A confeitaria Sempre Doce foi fundada em 2023 por Giovana Zem uma apaixonada por doces desde a infância. O amor por criar sobremesas deliciosas e o desejo de compartilhar essas delícias com o mundo levou à criação da Sempre Doce, uma confeitaria que rapidamente se tornou um ícone na cidade. Com uma equipe dedicada e receitas exclusivas, a Sempre Doce se destaca pela qualidade e inovação, oferecendo aos clientes uma experiência única a cada visita.</p>
+            <p>A missão da Sempre Doce é simples: adoçar a vida das pessoas. Cada bolo, torta e doce é preparado com os melhores ingredientes e uma dose extra de carinho. Venha nos visitar e deixe-nos transformar seu dia em uma celebração inesquecível!</p>
+        </section>
+
+        <!-- Seção de Destaques do Cardápio -->
+        <section class="featured" id="cardapio">
+            <h3>Destaques do Cardápio</h3>
+            <div class="cards">
+                <!-- Opções Existentes -->
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtDtzF3qL-wS2B3dyHKjKMzQWdirSuAj2EBQ&s" alt="Macarons">
+                    <h4>Macarons</h4>
+                    <p>Macarons frescos e coloridos em diversos sabores.</p>
+                    <button data-item="Macarons" data-price="10">Adicionar ao Carrinho</button>
+                </div>
+                <div class="card">
+                    <img src="https://www.receiteria.com.br/wp-content/uploads/cupcake.jpeg" alt="Cupcakes">
+                    <h4>Cupcakes</h4>
+                    <p>Cupcakes macios e decorados com cremes incríveis.</p>
+                    <button data-item="Cupcakes" data-price="15">Adicionar ao Carrinho</button>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGO2DJnicD5rm7zQpeWpyvqVNRcPISQyrDXw&s" alt="Bolos">
+                    <h4>Bolos</h4>
+                    <p>Bolos de sabores variados, perfeitos para qualquer ocasião.</p>
+                    <button data-item="Bolos" data-price="30">Adicionar ao Carrinho</button>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoYPwI2fNY8Lvbj6hm5R5tfKBAKgdKmNHLkw&s" alt="Cookies">
+                    <h4>Cookies</h4>
+                    <p>Cookies crocantes por fora e macios por dentro.</p>
+                    <button data-item="Cookies" data-price="12">Adicionar ao Carrinho</button>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStU0f1cGaQssd1pR5yZHM4Zxhm4bjQgx3OxA&s" alt="Tortas">
+                    <h4>Tortas</h4>
+                    <p>Tortas irresistíveis com massas crocantes e recheios cremosos.</p>
+                    <button data-item="Tortas" data-price="25">Adicionar ao Carrinho</button>
+                </div>
+                <!-- Novas Opções -->
+                <div class="card">
+                    <img src="https://i.pinimg.com/originals/59/93/4f/59934f6b50b2d6600968920223fbea74.jpg" alt="Brownies">
+                    <h4>Brownies</h4>
+                    <p>Brownies fudgy com pedaços de chocolate.</p>
+                    <button data-item="Brownies" data-price="18">Adicionar ao Carrinho</button>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsT2vLQjPBAXqKwbJzTR8zuw9lN-R9RxW-bg&s" alt="Donuts">
+                    <h4>Donuts</h4>
+                    <p>Donuts frescos cobertos com diversos tipos de glacê.</p>
+                    <button data-item="Donuts" data-price="20">Adicionar ao Carrinho</button>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNRiZ8BZaixeaWRU15Mn8pQDFNxqtyot0pCdUpQmi8J3YF3ethLYG4y9dVBmkMAfpblFQ&usqp=CAU" alt="Churros">
+                    <h4>Churros</h4>
+                    <p>Churros crocantes com açúcar e canela.</p>
+                    <button data-item="Churros" data-price="22">Adicionar ao Carrinho</button>
+                </div>
+                <div class="card">
+                    <img src="https://static.itdg.com.br/images/1200-675/d3988e0e494465742869253b68abca10/352606-original.jpg" alt="Pães de Mel">
+                    <h4>Pães de Mel</h4>
+                    <p>Pães de mel macios cobertos com chocolate.</p>
+                    <button data-item="Pães de Mel" data-price="17">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Contato -->
+        <section class="contact" id="contato">
+            <h3>Entre em Contato</h3>
+            <p>Tem alguma dúvida ou quer fazer um pedido especial? Entre em contato conosco!</p>
+            <div class="contact-info">
+                <div>
+                    <h4>Telefone</h4>
+                    <p>(19) 98449-2224</p>
+                </div>
+                <div>
+                    <h4>Email</h4>
+                    <p><a href="mailto:contato@sempredoce.com">contato@sempredoce.com</a></p>
+                </div>
+                <div>
+                    <h4>Endereço</h4>
+                    <p>Rua Ipiranga, 123 - Cidade Piracicaba, SP</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="cart">
+        <h4>Carrinho de Compras</h4>
+        <ul id="cart-items">
+            <!-- Itens serão adicionados aqui -->
+        </ul>
+        <button id="checkout">Finalizar Compra</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Sempre Doce. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Menu toggle para dispositivos móveis
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.menu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('menu-active');
+        });
+
+        // Função para adicionar itens ao carrinho
+        const cart = document.getElementById('cart-items');
+        const buttons = document.querySelectorAll('.card button');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.getAttribute('data-item');
+                const price = button.getAttribute('data-price');
+                const li = document.createElement('li');
+                li.textContent = `${item} - R$${price}`;
+                cart.appendChild(li);
+            });
+        });
+
+        // Função para finalizar a compra
+        document.getElementById('checkout').addEventListener('click', () => {
+            alert('Obrigado por sua compra!');
+            cart.innerHTML = ''; // Limpa o carrinho após a compra
+        });
+    </script>
+</body>
+</html>
