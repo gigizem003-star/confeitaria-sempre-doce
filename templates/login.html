@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sempre Doce - Login</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e3f2fd; /* Azul claro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            border: 2px solid #ffccf2; /* Rosa claro */
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #6a1b9a; /* Lilás */
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #6a1b9a; /* Lilás */
+            box-shadow: 0 0 5px rgba(106, 27, 154, 0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ffccf2; /* Rosa claro */
+            color: #6a1b9a; /* Lilás */
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #e1bee7; /* Lilás claro */
+            transform: scale(1.05);
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 14px;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Login - Sempre Doce</h2>
+
+        <form action="/login" method="POST">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="usuario" placeholder="Email" required>
+
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="senha" placeholder="Senha" required>
+
+            <button type="submit">Entrar</button>
+        </form>
+
+        <div class="message" id="message"></div>
+    </div>
+
+</body>
+</html>
+
+

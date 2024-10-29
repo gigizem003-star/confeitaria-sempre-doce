@@ -339,16 +339,18 @@
     </style>
 </head>
 <body>
+
     <header>
+
         <div class="logo">
             <h1>Sempre Doce</h1>
         </div>
         <nav>
             <ul class="menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#cardapio">Cardápio</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#contato">Contato</a></li>
+                <li><a href="{{ url_for('login') }}">login</a></li>
+                <li><a href="{{ url_for('cardapio') }}">Cardápio</a></li>
+                <li><a href="{{  url_for('sobre') }}">Sobre</a></li>
+                <li><a href="{{ url_for('contato') }}">Contato</a></li>
             </ul>
             <span class="menu-toggle">&#9776;</span>
         </nav>
@@ -373,6 +375,7 @@
         <section class="featured" id="cardapio">
             <h3>Destaques do Cardápio</h3>
             <div class="cards">
+
                 <!-- Opções Existentes -->
                 <div class="card">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtDtzF3qL-wS2B3dyHKjKMzQWdirSuAj2EBQ&s" alt="Macarons">
@@ -483,7 +486,7 @@
                 const item = button.getAttribute('data-item');
                 const price = button.getAttribute('data-price');
                 const li = document.createElement('li');
-                li.textContent = `${item} - R$${price}`;
+                li.textContent = ${item} - R$${price};
                 cart.appendChild(li);
             });
         });

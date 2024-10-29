@@ -338,6 +338,15 @@
     </style>
 
 </head>
+ <nav>
+            <ul class="menu">
+                <li><a href="{{ url_for('login') }}">login</a></li>
+                <li><a href="{{ url_for('cardapio') }}">Cardápio</a></li>
+                <li><a href="{{  url_for('sobre') }}">Sobre</a></li>
+                <li><a href="{{ url_for('contato') }}">Contato</a></li>
+            </ul>
+            <span class="menu-toggle">&#9776;</span>
+        </nav>
 <body>
 <!-- Seção de História -->
         <section class="story" id="sobre">
